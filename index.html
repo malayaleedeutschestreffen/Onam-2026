@@ -6,7 +6,6 @@
 <title>Onam Celebration 2026 — MDT BW e.V.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Tiro+Malayalam&family=Playfair+Display:ital,wght@0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
 :root {
   --bg:          #0E1A08;
@@ -667,12 +666,11 @@ input.invalid{border-color:var(--err)}
       Your slot is reserved for <strong>24 hours</strong>. Payment details have been shared with you via email — please complete the bank transfer and use your booking reference as the <em>Verwendungszweck</em>. Once your payment is verified (usually within 1 business day), your entry ticket QR code will be sent to your email.
     </div>
 
-    <!-- QR code box -->
-    <div class="qr-box">
-      <h3>Your Booking QR Code</h3>
-      <p>Show this at registration. Your entry ticket will arrive by email after payment is verified.</p>
-      <div id="qrcode" style="display:inline-block"></div>
-      <div class="qr-ref">Reference: <strong id="conf_ref_display"></strong></div>
+    <!-- Booking Reference box -->
+    <div class="ref-highlight" style="margin-bottom:16px;padding:24px 20px;text-align:center">
+      <div style="font-size:11px;color:var(--text3);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:10px">Your Booking Reference</div>
+      <div id="conf_ref_display" style="font-size:22px;font-weight:700;color:var(--gold);letter-spacing:0.12em;word-break:break-all"></div>
+      <div style="font-size:12px;color:var(--text2);margin-top:10px">Use this as <em>Verwendungszweck</em> for your bank transfer. Show this reference at the registration desk on the day of the event.</div>
     </div>
 
     <!-- Booking details -->
@@ -680,7 +678,7 @@ input.invalid{border-color:var(--err)}
 
     <!-- Final notice -->
     <div class="notice" style="border-left-color:var(--ok);background:rgba(114,193,145,0.05)">
-      Your QR entry ticket will be emailed once your payment transfer is verified. Please bring this QR code — digital or printed — to the registration desk on the day of the event.
+      Your booking confirmation will be emailed once your payment is verified. Please bring your booking reference to the registration desk on the day of the event.
     </div>
 
     <button class="btn btn-gold" onclick="window.print()">🖨️ Print / Save This Page</button>
@@ -693,7 +691,7 @@ input.invalid{border-color:var(--err)}
 //  APPS SCRIPT CONFIG
 //  Deploy Code.gs as a Web App, then paste URL here
 // ═══════════════════════════════════════════════
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyjxvr8eO_k-hI2bLp89m3pWEEhfJ1I5fGZb2WGSdGCcVFmEdtIVasHFS4IVQYPh63U/exec'; // ← REPLACE THIS
+const APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_WEB_APP_URL'; // ← REPLACE THIS
 
 // ═══════════════════════════════════════════════════════════════
 //  SLOT CONTROL
@@ -829,20 +827,6 @@ function copyRef() {
   });
 }
 
-function generateQR() {
-  document.getElementById('qrcode').innerHTML = '';
-  new QRCode(document.getElementById('qrcode'), {
-    text: JSON.stringify({
-      ref: state.ref, name: state.first+' '+state.last,
-      email: state.email, tickets: state._ticketLines,
-      event: 'Onam Celebration 2026 — MDT BW e.V.',
-      date: '12.09.2026', venue: 'Altes Feuerwehrhaus, Stuttgart'
-    }),
-    width:180, height:180,
-    colorDark:'#0E1A08', colorLight:'#FFFDF5',
-    correctLevel: QRCode.CorrectLevel.H
-  });
-}
 
 async function confirmPayment() {
   const ref = buildRef();
@@ -895,7 +879,6 @@ async function confirmPayment() {
   document.getElementById('conf_details').innerHTML = detailsHTML;
 
   goStep(3);
-  generateQR();
 
   // Send to Apps Script in background (non-blocking)
   if (APPS_SCRIPT_URL !== 'YOUR_APPS_SCRIPT_WEB_APP_URL') {
