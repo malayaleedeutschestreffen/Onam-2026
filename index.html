@@ -900,17 +900,17 @@ async function confirmPayment() {
   // Send to Apps Script in background (non-blocking)
   if (APPS_SCRIPT_URL !== 'YOUR_APPS_SCRIPT_WEB_APP_URL') {
     try {
-      const formData = new FormData();
-formData.append('data', JSON.stringify(payload));
-
-await fetch(APPS_SCRIPT_URL, {
-  method: 'POST',
-  body: formData,
-  mode: 'no-cors',
-});
+      const params = new URLSearchParams();
+      params.append('data', JSON.stringify(payload));
+      await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        body: params,
+        mode: 'no-cors',
+      });
     } catch(e) {
       console.warn('Apps Script submission error:', e);
     }
+  }
   } else {
     console.info('[DEV] Apps Script URL not set — skipping backend call. Payload:', payload);
   }
