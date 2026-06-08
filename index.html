@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Onam Celebration 2026 — MDT BW e.V.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Malayalam&family=Playfair+Display:ital,wght@0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+:root {
+  --bg:          #0E1A08;
+  --bg2:         #152210;
+  --bg3:         #1B2D14;
+  --leaf:        #2D5A1B;
+  --leaf2:       #3E7A26;
+  --leaf-light:  #6DB84A;
+  --gold:        #E8A020;
+  --gold2:       #F5C842;
+  --gold-pale:   rgba(232,160,32,0.12);
+  --gold-border: rgba(232,160,32,0.30);
+  --orange:      #E05A18;
+  --orange2:     #F07840;
+  --yellow:      #F0D040;
+  --red:         #C02828;
+  --pink:        #D4608A;
+  --white:       #FFFDF5;
+  --text:        #F0EDD8;
+  --text2:       #A8C080;
+  --text3:       #5A7840;
+  --err:         #E07070;
+  --ok:          #72C191;
+  --r:           14px;
+  --rs:          9px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Outfit',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  font-size:15px;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+
+/* ══════════════════════════════════════
+   ONAM POOKALAM SVG BACKGROUND
+   ══════════════════════════════════════ */
+.pookalam-bg {
+  position:fixed;top:0;left:0;right:0;bottom:0;
+  pointer-events:none;z-index:0;overflow:hidden;
+}
+/* Radial glow in centre — like a lit pookalam */
+.pookalam-bg::before {
+  content:'';
+  position:absolute;
+  top:-10%;left:50%;
+  transform:translateX(-50%);
+  width:900px;height:600px;
+  background:
+    radial-gradient(ellipse 30% 20% at 50% 40%, rgba(240,200,64,0.10) 0%,transparent 60%),
+    radial-gradient(ellipse 60% 50% at 50% 35%, rgba(232,160,32,0.07) 0%,transparent 65%),
+    radial-gradient(ellipse 90% 70% at 50% 30%, rgba(45,90,27,0.12) 0%,transparent 70%);
+}
+/* Bottom Kerala banana-leaf green fade */
+.pookalam-bg::after {
+  content:'';
+  position:absolute;
+  bottom:0;left:0;right:0;height:300px;
+  background:linear-gradient(0deg,rgba(45,90,27,0.18) 0%,transparent 100%);
+}
+
+/* ── DECORATIVE TOP BORDER — Kerala temple colour stripe ── */
+.top-stripe {
+  position:fixed;top:0;left:0;right:0;height:6px;z-index:100;
+  background:linear-gradient(90deg,
+    #C02828 0%,#C02828 12%,
+    #E8A020 12%,#E8A020 24%,
+    #F5C842 24%,#F5C842 36%,
+    #2D5A1B 36%,#2D5A1B 50%,
+    #F5C842 50%,#F5C842 62%,
+    #E8A020 62%,#E8A020 74%,
+    #C02828 74%,#C02828 86%,
+    #D4608A 86%,#D4608A 100%
+  );
+}
+
+/* ══ PAGE WRAP ══ */
+.page-wrap{position:relative;z-index:1;max-width:640px;margin:0 auto;padding:56px 20px 90px}
+
+/* ══ SVG POOKALAM MEDALLION ══ */
+.pookalam-medallion {
+  display:flex;justify-content:center;margin-bottom:8px;
+}
+
+/* ══ HEADER ══ */
+.page-header{text-align:center;margin-bottom:36px}
+.org-name{
+  font-size:11px;letter-spacing:0.20em;text-transform:uppercase;
+  color:var(--gold2);margin-bottom:20px;
+  display:flex;align-items:center;justify-content:center;gap:12px;
+}
+.org-name::before,.org-name::after{
+  content:'';display:block;flex:1;max-width:50px;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold-border));
+}
+.org-name::after{background:linear-gradient(90deg,var(--gold-border),transparent)}
+
+.event-title-wrap{position:relative;display:inline-block;margin-bottom:6px}
+.page-header h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(44px,10vw,72px);
+  font-weight:700;line-height:1.0;
+  color:var(--gold2);
+  text-shadow:0 0 60px rgba(240,200,64,0.3);
+}
+.page-header .year-tag{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(18px,4vw,26px);
+  font-style:italic;
+  color:var(--orange2);
+  margin-bottom:6px;
+  display:block;
+}
+.kerala-tagline{
+  font-size:13px;color:var(--text2);
+  margin-bottom:24px;letter-spacing:0.03em;
+}
+/* Malayalam script flourish */
+.malayalam-text{
+  font-family:'Tiro Malayalam',serif;
+  font-size:22px;color:var(--gold);
+  margin-bottom:16px;display:block;
+  opacity:0.85;
+}
+
+/* ══ EVENT INFO CARD ══ */
+.event-info{
+  background:rgba(21,34,16,0.85);
+  border:1px solid var(--gold-border);
+  border-radius:var(--r);
+  padding:22px 24px;
+  margin-bottom:10px;
+  backdrop-filter:blur(4px);
+  position:relative;
+  overflow:hidden;
+}
+.event-info::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),var(--orange),var(--gold),transparent);
+}
+.event-meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.event-meta-item{
+  background:rgba(27,45,20,0.8);
+  border:1px solid rgba(232,160,32,0.15);
+  border-radius:var(--rs);padding:12px 14px;
+}
+.event-meta-item .emi-icon{font-size:20px;margin-bottom:4px}
+.event-meta-item .emi-label{font-size:10px;color:var(--text3);letter-spacing:0.08em;text-transform:uppercase}
+.event-meta-item .emi-val{font-size:13px;font-weight:500;color:var(--text);line-height:1.3}
+
+.schedule-heading{
+  font-size:11px;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--text3);margin-bottom:10px;font-weight:500;
+}
+.schedule-grid{display:flex;flex-direction:column;gap:7px}
+.sched-item{
+  display:flex;align-items:center;gap:12px;
+  background:rgba(27,45,20,0.6);
+  border-radius:var(--rs);padding:10px 14px;
+  border-left:3px solid var(--gold);
+}
+.sched-item:nth-child(2){border-left-color:var(--orange)}
+.sched-item:nth-child(3){border-left-color:var(--leaf-light)}
+.sched-time{
+  font-size:12px;color:var(--gold2);font-weight:600;
+  min-width:108px;font-family:'Courier New',monospace;letter-spacing:0.02em;
+}
+.sched-label{font-size:13px;color:var(--text)}
+
+/* ══ PROGRESS ══ */
+.progress-bar{display:flex;align-items:center;margin:32px 0 24px}
+.prog-step{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;position:relative}
+.prog-step:not(:last-child)::after{
+  content:'';position:absolute;top:14px;left:50%;width:100%;
+  height:1px;background:var(--gold-border);transition:background 0.4s;
+}
+.prog-step.done:not(:last-child)::after{background:var(--gold)}
+.prog-dot{
+  width:28px;height:28px;border-radius:50%;
+  border:1.5px solid var(--text3);background:var(--bg2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:600;color:var(--text3);
+  transition:all 0.3s;position:relative;z-index:1;
+}
+.prog-step.active .prog-dot{border-color:var(--gold);color:var(--gold)}
+.prog-step.done .prog-dot{border-color:var(--gold);background:var(--gold);color:var(--bg)}
+.prog-label{font-size:10px;color:var(--text3);letter-spacing:0.06em;text-transform:uppercase;transition:color 0.3s}
+.prog-step.active .prog-label,.prog-step.done .prog-label{color:var(--gold)}
+
+/* ══ CARD ══ */
+.card{
+  background:rgba(21,34,16,0.92);
+  border:1px solid var(--gold-border);
+  border-radius:var(--r);
+  padding:32px;
+  animation:fadeUp 0.35s ease both;
+  backdrop-filter:blur(6px);
+  position:relative;overflow:hidden;
+}
+.card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+.card-heading{
+  font-family:'Playfair Display',serif;font-size:26px;font-weight:700;
+  color:var(--gold2);margin-bottom:4px;
+}
+.card-sub{
+  font-size:13px;color:var(--text2);
+  margin-bottom:26px;padding-bottom:18px;
+  border-bottom:1px solid rgba(232,160,32,0.1);
+}
+
+/* ══ FIELDS ══ */
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+.field:last-child{margin-bottom:0}
+label{font-size:11px;font-weight:500;color:var(--text2);letter-spacing:0.07em;text-transform:uppercase}
+input[type=text],input[type=email],input[type=tel]{
+  height:46px;background:rgba(27,45,20,0.9);
+  border:1px solid var(--gold-border);border-radius:var(--rs);
+  padding:0 14px;font-family:'Outfit',sans-serif;font-size:14px;color:var(--text);
+  outline:none;transition:border-color 0.2s,background 0.2s;
+}
+input:focus{border-color:var(--gold);background:rgba(35,58,24,0.95)}
+input::placeholder{color:var(--text3)}
+input.invalid{border-color:var(--err)}
+.err{font-size:11px;color:var(--err);display:none;margin-top:2px}
+.err.show{display:block}
+
+/* ══ TICKET CARDS ══ */
+.tickets-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px}
+.tkt{
+  border:1px solid var(--gold-border);border-radius:var(--rs);
+  padding:18px 14px 14px;background:rgba(27,45,20,0.7);
+  transition:border-color 0.2s,background 0.2s;
+  display:flex;flex-direction:column;
+}
+.tkt.has-qty{border-color:var(--gold);background:rgba(232,160,32,0.1)}
+.tkt-icon{font-size:28px;margin-bottom:6px}
+.tkt-name{font-size:14px;font-weight:600;color:var(--text)}
+.tkt-desc{font-size:11px;color:var(--text2);margin-top:2px;margin-bottom:10px;flex:1}
+.tkt-price{
+  font-family:'Playfair Display',serif;font-size:26px;font-weight:700;
+  color:var(--gold2);line-height:1;margin-bottom:12px;
+}
+.tkt-price small{font-size:12px;color:var(--text2);font-family:'Outfit',sans-serif;font-weight:400}
+.qty-row{display:flex;align-items:center;border:1px solid var(--gold-border);border-radius:6px;overflow:hidden;width:fit-content}
+.qty-btn{
+  width:32px;height:32px;background:var(--bg2);border:none;
+  color:var(--gold2);font-size:18px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background 0.15s;
+}
+.qty-btn:hover{background:rgba(232,160,32,0.15)}
+.qty-val{
+  width:36px;height:32px;background:rgba(27,45,20,0.9);
+  display:flex;align-items:center;justify-content:center;
+  font-size:15px;font-weight:600;color:var(--text);
+  border-left:1px solid var(--gold-border);border-right:1px solid var(--gold-border);
+}
+
+/* ══ TICKET TOTAL BAR ══ */
+.ticket-total-bar{
+  background:rgba(232,160,32,0.08);border:1px solid var(--gold-border);
+  border-radius:var(--rs);padding:14px 18px;
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:6px;
+}
+.ttl-label{font-size:13px;color:var(--text2)}
+.ttl-val{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--gold2)}
+
+/* ══ PAYMENT ══ */
+.summary-box{background:rgba(27,45,20,0.7);border:1px solid var(--gold-border);border-radius:var(--rs);padding:20px;margin-bottom:18px}
+.summary-row{display:flex;justify-content:space-between;padding:7px 0;font-size:13px;border-bottom:1px solid rgba(232,160,32,0.08)}
+.summary-row:last-child{border-bottom:none}
+.summary-row .sk{color:var(--text2)}
+.summary-row .sv{font-weight:500;color:var(--text);text-align:right;max-width:60%}
+.summary-row.total{margin-top:6px;padding-top:14px;border-top:1px solid var(--gold-border);border-bottom:none}
+.summary-row.total .sv{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--gold2)}
+
+.bank-box{
+  background:#070D04;border:1px solid var(--gold-border);
+  border-radius:var(--rs);padding:22px;margin-bottom:16px;
+  position:relative;overflow:hidden;
+}
+.bank-box::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--red),var(--gold),var(--leaf-light),var(--gold),var(--red));
+}
+.bank-box h3{font-family:'Playfair Display',serif;font-size:17px;color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.bank-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid rgba(232,160,32,0.07);font-size:13px}
+.bank-row:last-child{border-bottom:none}
+.bank-row .bk{color:var(--text2)}
+.bank-row .bv{font-family:'Courier New',monospace;font-size:12.5px;color:var(--gold2);letter-spacing:0.05em;font-weight:600}
+.ref-highlight{
+  margin-top:14px;background:rgba(232,160,32,0.07);
+  border:1px dashed rgba(232,160,32,0.35);
+  border-radius:var(--rs);padding:14px 16px;text-align:center;
+}
+.ref-label{font-size:10px;color:var(--text3);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:5px}
+.ref-value{font-size:16px;font-weight:600;color:var(--gold);letter-spacing:0.1em;word-break:break-all}
+
+.notice{
+  border-left:3px solid var(--gold);background:rgba(232,160,32,0.05);
+  border-radius:0 var(--rs) var(--rs) 0;
+  padding:12px 16px;font-size:12.5px;color:var(--text2);line-height:1.6;margin-bottom:18px;
+}
+.notice strong{color:var(--text)}
+
+/* ══ BUTTONS ══ */
+.btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;height:52px;border-radius:var(--rs);
+  font-family:'Outfit',sans-serif;font-size:15px;font-weight:600;
+  cursor:pointer;border:none;transition:all 0.2s;margin-top:20px;
+}
+.btn-gold{
+  background:linear-gradient(135deg,var(--gold) 0%,var(--orange) 100%);
+  color:var(--white);letter-spacing:0.02em;
+  box-shadow:0 4px 20px rgba(232,160,32,0.25);
+}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(232,160,32,0.35)}
+.btn-gold:active{transform:translateY(0)}
+.btn-gold:disabled{opacity:0.5;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-ghost{background:transparent;border:1px solid var(--gold-border);color:var(--text2);margin-top:10px;font-size:13px}
+.btn-ghost:hover{border-color:var(--gold);color:var(--text)}
+.copy-btn{background:none;border:none;color:var(--gold);font-size:10px;cursor:pointer;padding:2px 7px;border-radius:4px;transition:background 0.2s;letter-spacing:0.05em;text-transform:uppercase}
+.copy-btn:hover{background:rgba(232,160,32,0.12)}
+
+/* ══ CONFIRMATION ══ */
+.conf-top{text-align:center;padding-bottom:24px;margin-bottom:22px;border-bottom:1px solid rgba(232,160,32,0.12)}
+.conf-icon{font-size:54px;margin-bottom:12px;animation:pop 0.5s cubic-bezier(0.34,1.56,0.64,1) both}
+@keyframes pop{from{transform:scale(0.3);opacity:0}to{transform:scale(1);opacity:1}}
+.conf-top h2{font-family:'Playfair Display',serif;font-size:32px;color:var(--gold2);margin-bottom:6px}
+.conf-top p{font-size:13px;color:var(--text2)}
+.email-ok{display:flex;align-items:center;gap:10px;background:rgba(114,193,145,0.07);border:1px solid rgba(114,193,145,0.2);border-radius:var(--rs);padding:12px 16px;font-size:13px;color:var(--ok);margin-bottom:16px}
+.qr-box{text-align:center;padding:24px;border:1px solid var(--gold-border);border-radius:var(--rs);background:rgba(27,45,20,0.5);margin-bottom:16px}
+.qr-box h3{font-size:14px;font-weight:500;color:var(--text2);margin-bottom:4px}
+.qr-box p{font-size:11px;color:var(--text3);margin-bottom:16px}
+#qrcode canvas,#qrcode img{border-radius:var(--rs);border:6px solid var(--white)}
+.qr-ref{margin-top:14px;font-size:12px;color:var(--text2)}
+.qr-ref strong{color:var(--gold);font-size:14px;letter-spacing:0.1em}
+.detail-list{border:1px solid rgba(232,160,32,0.12);border-radius:var(--rs);overflow:hidden;margin-bottom:16px}
+.detail-row{display:flex;justify-content:space-between;padding:11px 16px;font-size:13px;border-bottom:1px solid rgba(232,160,32,0.07)}
+.detail-row:last-child{border-bottom:none}
+.detail-row .dk{color:var(--text2)}
+.detail-row .dv{font-weight:500;color:var(--text);text-align:right;max-width:65%}
+
+.consent-section {
+  margin-top: 22px;
+  border-top: 1px solid rgba(232,160,32,0.12);
+  padding-top: 18px;
+}
+.consent-heading {
+  font-size: 11px; font-weight: 500; color: var(--text2);
+  letter-spacing: 0.07em; text-transform: uppercase; margin-bottom: 14px;
+}
+.consent-label {
+  display: flex; align-items: flex-start; gap: 12px;
+  cursor: pointer; position: relative;
+}
+.consent-label input[type=checkbox] {
+  position: absolute; opacity: 0; width: 0; height: 0;
+}
+.consent-check {
+  flex-shrink: 0; width: 20px; height: 20px; margin-top: 2px;
+  border: 1.5px solid var(--gold-border); border-radius: 5px;
+  background: rgba(27,45,20,0.9);
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.consent-label input[type=checkbox]:checked ~ .consent-check {
+  background: var(--gold); border-color: var(--gold);
+}
+.consent-label input[type=checkbox]:checked ~ .consent-check::after {
+  content: '✓'; font-size: 12px; font-weight: 700; color: var(--bg);
+}
+.consent-text {
+  font-size: 12.5px; color: var(--text2); line-height: 1.6;
+}
+.consent-text strong { color: var(--text); }
+
+.spinner{width:18px;height:18px;border:2px solid rgba(255,255,255,0.3);border-top-color:var(--white);border-radius:50%;animation:spin 0.7s linear infinite;display:inline-block}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.step{display:none}
+.step.active{display:block}
+
+@media(max-width:480px){
+  .row2,.tickets-grid,.event-meta-grid{grid-template-columns:1fr}
+  .card{padding:20px 16px}
+  .sched-time{min-width:90px}
+}
+</style>
+</head>
+<body>
+
+<!-- Kerala colour stripe -->
+<div class="top-stripe"></div>
+
+<!-- Pookalam radial background glow -->
+<div class="pookalam-bg"></div>
+
+<!-- ══ SLOTS FULL BANNER (hidden by default) ══ -->
+<div id="slots-full-banner" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(14,26,8,0.97);display:none;flex-direction:column;align-items:center;justify-content:center;padding:32px;text-align:center">
+  <div style="max-width:480px;background:rgba(21,34,16,0.95);border:1px solid rgba(232,160,32,0.35);border-radius:16px;padding:40px 32px;position:relative;overflow:hidden">
+    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#C02828,#E8A020,#F5C842,#E8A020,#C02828)"></div>
+    <div style="font-size:52px;margin-bottom:16px">🎊</div>
+    <h2 style="font-family:'Playfair Display',serif;font-size:28px;color:#F5C842;margin-bottom:12px">Slots are Full</h2>
+    <p style="font-size:14px;color:#A8C080;line-height:1.7;margin-bottom:20px">
+      All slots for <strong style="color:#F0EDD8">Onam Celebration 2026</strong> are currently taken.<br>
+      We will reach out to you if any additional slots become available.
+    </p>
+    <div style="background:rgba(232,160,32,0.07);border:1px solid rgba(232,160,32,0.2);border-radius:10px;padding:16px 20px;font-size:13px;color:#A8C080">
+      📧 To be added to the waitlist, please email us or follow our community channels for updates.
+    </div>
+    <p style="margin-top:20px;font-size:11px;color:#5A7840;letter-spacing:0.06em">Malayalee Deutsches Treffen BW e.V.</p>
+  </div>
+</div>
+
+<div class="page-wrap">
+
+  <!-- ══ SVG POOKALAM MEDALLION ══ -->
+  <div class="pookalam-medallion">
+    <svg width="160" height="160" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%"   stop-color="#F5C842" stop-opacity="0.25"/>
+          <stop offset="100%" stop-color="#F5C842" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <!-- Outer glow -->
+      <circle cx="80" cy="80" r="78" fill="url(#glow)"/>
+      <!-- Petal ring 1 — outer (8 petals, orange) -->
+      <g opacity="0.9">
+        <ellipse cx="80" cy="22" rx="9" ry="20" fill="#E05A18" transform="rotate(0,80,80)"/>
+        <ellipse cx="80" cy="22" rx="9" ry="20" fill="#E05A18" transform="rotate(45,80,80)"/>
+        <ellipse cx="80" cy="22" rx="9" ry="20" fill="#E05A18" transform="rotate(90,80,80)"/>
+        <ellipse cx="80" cy="22" rx="9" ry="20" fill="#E05A18" transform="rotate(135,80,80)"/>
+        <ellipse cx="80" cy="22" rx="9" ry="20" fill="#E05A18" transform="rotate(180,80,80)"/>
+        <ellipse cx="80" cy="22" rx="9" ry="20" fill="#E05A18" transform="rotate(225,80,80)"/>
+        <ellipse cx="80" cy="22" rx="9" ry="20" fill="#E05A18" transform="rotate(270,80,80)"/>
+        <ellipse cx="80" cy="22" rx="9" ry="20" fill="#E05A18" transform="rotate(315,80,80)"/>
+      </g>
+      <!-- Petal ring 2 — mid (8 petals, yellow) -->
+      <g opacity="0.95">
+        <ellipse cx="80" cy="35" rx="7" ry="16" fill="#F5C842" transform="rotate(22.5,80,80)"/>
+        <ellipse cx="80" cy="35" rx="7" ry="16" fill="#F5C842" transform="rotate(67.5,80,80)"/>
+        <ellipse cx="80" cy="35" rx="7" ry="16" fill="#F5C842" transform="rotate(112.5,80,80)"/>
+        <ellipse cx="80" cy="35" rx="7" ry="16" fill="#F5C842" transform="rotate(157.5,80,80)"/>
+        <ellipse cx="80" cy="35" rx="7" ry="16" fill="#F5C842" transform="rotate(202.5,80,80)"/>
+        <ellipse cx="80" cy="35" rx="7" ry="16" fill="#F5C842" transform="rotate(247.5,80,80)"/>
+        <ellipse cx="80" cy="35" rx="7" ry="16" fill="#F5C842" transform="rotate(292.5,80,80)"/>
+        <ellipse cx="80" cy="35" rx="7" ry="16" fill="#F5C842" transform="rotate(337.5,80,80)"/>
+      </g>
+      <!-- Petal ring 3 — inner (6 petals, pink/red) -->
+      <g opacity="0.9">
+        <ellipse cx="80" cy="50" rx="6" ry="13" fill="#D4608A" transform="rotate(0,80,80)"/>
+        <ellipse cx="80" cy="50" rx="6" ry="13" fill="#D4608A" transform="rotate(60,80,80)"/>
+        <ellipse cx="80" cy="50" rx="6" ry="13" fill="#D4608A" transform="rotate(120,80,80)"/>
+        <ellipse cx="80" cy="50" rx="6" ry="13" fill="#D4608A" transform="rotate(180,80,80)"/>
+        <ellipse cx="80" cy="50" rx="6" ry="13" fill="#D4608A" transform="rotate(240,80,80)"/>
+        <ellipse cx="80" cy="50" rx="6" ry="13" fill="#D4608A" transform="rotate(300,80,80)"/>
+      </g>
+      <!-- Petal ring 4 — innermost (6 petals, green leaf) -->
+      <g opacity="0.9">
+        <ellipse cx="80" cy="60" rx="5" ry="10" fill="#4A9E30" transform="rotate(30,80,80)"/>
+        <ellipse cx="80" cy="60" rx="5" ry="10" fill="#4A9E30" transform="rotate(90,80,80)"/>
+        <ellipse cx="80" cy="60" rx="5" ry="10" fill="#4A9E30" transform="rotate(150,80,80)"/>
+        <ellipse cx="80" cy="60" rx="5" ry="10" fill="#4A9E30" transform="rotate(210,80,80)"/>
+        <ellipse cx="80" cy="60" rx="5" ry="10" fill="#4A9E30" transform="rotate(270,80,80)"/>
+        <ellipse cx="80" cy="60" rx="5" ry="10" fill="#4A9E30" transform="rotate(330,80,80)"/>
+      </g>
+      <!-- Centre circle -->
+      <circle cx="80" cy="80" r="14" fill="#E8A020"/>
+      <circle cx="80" cy="80" r="9"  fill="#F5C842"/>
+      <circle cx="80" cy="80" r="4"  fill="#0E1A08"/>
+    </svg>
+  </div>
+
+  <!-- ══ HEADER ══ -->
+  <div class="page-header">
+    <div class="org-name">Malayalee Deutsches Treffen BW e.V.</div>
+    <span class="malayalam-text">ഓണം ആഘോഷം</span>
+    <div class="event-title-wrap">
+      <h1>Onam Celebration</h1>
+    </div>
+    <span class="year-tag">2026</span>
+    <p class="kerala-tagline">Celebrating the harvest festival of Kerala in the heart of Stuttgart</p>
+
+    <!-- Event Info -->
+    <div class="event-info">
+      <div class="event-meta-grid">
+        <div class="event-meta-item">
+          <div class="emi-icon">📅</div>
+          <div class="emi-label">Date</div>
+          <div class="emi-val">12. September 2026<br><span style="font-size:11px;color:var(--text3)">Saturday</span></div>
+        </div>
+        <div class="event-meta-item">
+          <div class="emi-icon">📍</div>
+          <div class="emi-label">Venue</div>
+          <div class="emi-val">Altes Feuerwehrhaus<br><span style="font-size:11px;color:var(--text3)">Möhringerstr. 56, 70199 Stuttgart</span></div>
+        </div>
+      </div>
+
+      <div class="schedule-heading">Event Schedule</div>
+      <div class="schedule-grid">
+        <div class="sched-item">
+          <div class="sched-time">10:30 – 12:30</div>
+          <div class="sched-label">🚪 Registration</div>
+        </div>
+        <div class="sched-item">
+          <div class="sched-time">11:30 – 13:30</div>
+          <div class="sched-label">🍛 Onam Sadhya</div>
+        </div>
+        <div class="sched-item">
+          <div class="sched-time">14:00 – 17:00</div>
+          <div class="sched-label">🎭 Cultural Events</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ PROGRESS ══ -->
+  <div class="progress-bar">
+    <div class="prog-step active" id="ps1"><div class="prog-dot">1</div><div class="prog-label">Details</div></div>
+    <div class="prog-step" id="ps2"><div class="prog-dot">2</div><div class="prog-label">Tickets</div></div>
+    <div class="prog-step" id="ps3"><div class="prog-dot">✓</div><div class="prog-label">Reservation</div></div>
+  </div>
+
+  <!-- ══ STEP 1 — Personal Details ══ -->
+  <div class="step active card" id="step1">
+    <div class="card-heading">Your Details</div>
+    <div class="card-sub">Please fill in your information to register for the event.</div>
+    <div class="row2">
+      <div class="field">
+        <label>First Name *</label>
+        <input type="text" id="f_first" placeholder="Arun">
+        <div class="err" id="e_first">Required</div>
+      </div>
+      <div class="field">
+        <label>Last Name *</label>
+        <input type="text" id="f_last" placeholder="Kumar">
+        <div class="err" id="e_last">Required</div>
+      </div>
+    </div>
+    <div class="field">
+      <label>Email Address *</label>
+      <input type="email" id="f_email" placeholder="arun.kumar@beispiel.de">
+      <div class="err" id="e_email">Enter a valid email address</div>
+    </div>
+    <div class="field" style="margin-bottom:0">
+      <label>Phone Number (optional)</label>
+      <input type="tel" id="f_phone" placeholder="+49 160 000 0000">
+    </div>
+
+    <!-- Data Consent -->
+    <div class="consent-section">
+      <div class="consent-heading">Consent & Data Protection</div>
+      <label class="consent-label">
+        <input type="checkbox" id="consent_data" class="consent-cb">
+        <span class="consent-check"></span>
+        <span class="consent-text">
+          I consent to MDT BW e.V. collecting and storing my personal data (name, email, phone) solely for the purpose of managing my event registration. <strong>Your data will not be shared with third parties or misused in any way.</strong> You may request deletion at any time by contacting us.
+        </span>
+      </label>
+      <div class="err" id="e_consent_data">Please accept the data consent to continue.</div>
+
+      <label class="consent-label" style="margin-top:12px">
+        <input type="checkbox" id="consent_media" class="consent-cb">
+        <span class="consent-check"></span>
+        <span class="consent-text">
+          I consent to photographs and videos being taken at the event for use in MDT BW e.V.'s community communications, social media, and event documentation. <strong>This consent is required to attend the event.</strong>
+        </span>
+      </label>
+      <div class="err" id="e_consent_media">Please accept the photo & video consent to continue.</div>
+    </div>
+
+    <button class="btn btn-gold" onclick="step1Next()">Continue to Ticket Selection →</button>
+  </div>
+
+  <!-- ══ STEP 2 — Tickets ══ -->
+  <div class="step card" id="step2">
+    <div class="card-heading">Select Tickets</div>
+    <div class="card-sub">You can select multiple tickets of different types. Use + / − to set quantities.</div>
+    <div class="tickets-grid">
+      <div class="tkt" id="tkt_adult">
+        <div class="tkt-icon">🧑</div>
+        <div class="tkt-name">Adult</div>
+        <div class="tkt-desc">Age 16 and above</div>
+        <div class="tkt-price">€23 <small>/ person</small></div>
+        <div class="qty-row">
+          <button class="qty-btn" onclick="changeQty('adult',-1)">−</button>
+          <div class="qty-val" id="qty_adult">0</div>
+          <button class="qty-btn" onclick="changeQty('adult',1)">+</button>
+        </div>
+      </div>
+      <div class="tkt" id="tkt_student">
+        <div class="tkt-icon">🎓</div>
+        <div class="tkt-name">Student</div>
+        <div class="tkt-desc">Valid student ID required</div>
+        <div class="tkt-price">€20 <small>/ person</small></div>
+        <div class="qty-row">
+          <button class="qty-btn" onclick="changeQty('student',-1)">−</button>
+          <div class="qty-val" id="qty_student">0</div>
+          <button class="qty-btn" onclick="changeQty('student',1)">+</button>
+        </div>
+      </div>
+      <div class="tkt" id="tkt_kid">
+        <div class="tkt-icon">🧒</div>
+        <div class="tkt-name">Child</div>
+        <div class="tkt-desc">Age 9 and below</div>
+        <div class="tkt-price">€10 <small>/ person</small></div>
+        <div class="qty-row">
+          <button class="qty-btn" onclick="changeQty('kid',-1)">−</button>
+          <div class="qty-val" id="qty_kid">0</div>
+          <button class="qty-btn" onclick="changeQty('kid',1)">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="ticket-total-bar">
+      <span class="ttl-label">Total (<span id="total_count">0</span> ticket(s))</span>
+      <span class="ttl-val" id="total_price">€0.00</span>
+    </div>
+    <div class="err" id="e_ticket" style="margin-bottom:4px">Please add at least one ticket to continue.</div>
+    <button class="btn btn-gold" onclick="step2Next()">Continue to Reservation →</button>
+    <button class="btn btn-ghost" onclick="goStep(1)">← Back</button>
+  </div>
+
+  <!-- ══ STEP 3 — Reservation & Confirmation ══ -->
+  <div class="step card" id="step3">
+    <!-- Reservation confirmed banner -->
+    <div class="conf-top">
+      <div class="conf-icon">🎊</div>
+      <h2>Slot Reserved!</h2>
+      <p>Your slot has been reserved for the next <strong style="color:var(--gold)">24 hours</strong>. Complete your payment within this time to confirm your booking.</p>
+    </div>
+
+    <!-- Booking summary -->
+    <div class="summary-box" id="pay_summary"></div>
+
+    <!-- Email notice -->
+    <div class="email-ok">
+      <span style="font-size:18px">📧</span>
+      <span>Payment details have been sent to <strong id="conf_email_display"></strong></span>
+    </div>
+
+    <!-- Payment instruction notice -->
+    <div class="notice" style="border-left-color:var(--gold2);background:rgba(232,160,32,0.06);margin-bottom:18px">
+      <strong>⏳ What happens next?</strong><br>
+      Your slot is reserved for <strong>24 hours</strong>. Payment details have been shared with you via email — please complete the bank transfer and use your booking reference as the <em>Verwendungszweck</em>. Once your payment is verified (usually within 1 business day), your entry ticket QR code will be sent to your email.
+    </div>
+
+    <!-- QR code box -->
+    <div class="qr-box">
+      <h3>Your Booking QR Code</h3>
+      <p>Show this at registration. Your entry ticket will arrive by email after payment is verified.</p>
+      <div id="qrcode" style="display:inline-block"></div>
+      <div class="qr-ref">Reference: <strong id="conf_ref_display"></strong></div>
+    </div>
+
+    <!-- Booking details -->
+    <div class="detail-list" id="conf_details"></div>
+
+    <!-- Final notice -->
+    <div class="notice" style="border-left-color:var(--ok);background:rgba(114,193,145,0.05)">
+      Your QR entry ticket will be emailed once your payment transfer is verified. Please bring this QR code — digital or printed — to the registration desk on the day of the event.
+    </div>
+
+    <button class="btn btn-gold" onclick="window.print()">🖨️ Print / Save This Page</button>
+  </div>
+
+</div><!-- /page-wrap -->
+
+<script>
+// ═══════════════════════════════════════════════
+//  APPS SCRIPT CONFIG
+//  Deploy Code.gs as a Web App, then paste URL here
+// ═══════════════════════════════════════════════
+const APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_WEB_APP_URL'; // ← REPLACE THIS
+
+// ═══════════════════════════════════════════════════════════════
+//  SLOT CONTROL
+//  Set BOOKING_OPEN = false to manually close the form immediately.
+//  The Apps Script doGet returns { open: true/false } based on MAX_SLOTS.
+// ═══════════════════════════════════════════════════════════════
+const BOOKING_OPEN = true; // ← Fallback: set false to manually close bookings
+
+async function checkSlotStatus() {
+  if (APPS_SCRIPT_URL === 'YOUR_APPS_SCRIPT_WEB_APP_URL') {
+    if (!BOOKING_OPEN) showSlotsFull();
+    return;
+  }
+  try {
+    const res = await fetch(APPS_SCRIPT_URL + '?action=status');
+    const data = await res.json();
+    if (!data.open) showSlotsFull();
+  } catch(e) {
+    console.warn('Could not check slot status:', e);
+    if (!BOOKING_OPEN) showSlotsFull();
+  }
+}
+
+function showSlotsFull() {
+  const banner = document.getElementById('slots-full-banner');
+  banner.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+
+const TICKETS = {
+  adult:   { label:'Adult (16+)',       icon:'🧑', price:23, code:'A' },
+  student: { label:'Student',           icon:'🎓', price:20, code:'S' },
+  kid:     { label:'Child (under 10)',  icon:'🧒', price:10,  code:'K' },
+};
+
+const qty = { adult:0, student:0, kid:0 };
+const state = { first:'', last:'', email:'', phone:'', ref:'', _grandTotal:0, _ticketLines:[] };
+
+function getNextBookingNum() {
+  let n = parseInt(localStorage.getItem('mdt_onam26_seq') || '0') + 1;
+  localStorage.setItem('mdt_onam26_seq', n);
+  return String(n).padStart(3,'0');
+}
+
+function buildRef() {
+  const n = getNextBookingNum();
+  return `MDTOnam26-${n}A${qty.adult}S${qty.student}K${qty.kid}`;
+}
+
+function changeQty(type, delta) {
+  qty[type] = Math.max(0, qty[type] + delta);
+  document.getElementById('qty_'+type).textContent = qty[type];
+  document.getElementById('tkt_'+type).classList.toggle('has-qty', qty[type] > 0);
+  updateTotals();
+  document.getElementById('e_ticket').classList.remove('show');
+}
+
+function updateTotals() {
+  let total = 0;
+  for (const [k,v] of Object.entries(qty)) total += v * TICKETS[k].price;
+  const ticketCount = Object.values(qty).reduce((a,b)=>a+b, 0);
+  document.getElementById('total_price').textContent = '€'+total.toFixed(2);
+  document.getElementById('total_count').textContent = ticketCount;
+}
+
+function goStep(n) {
+  document.querySelectorAll('.step').forEach((s,i) => s.classList.toggle('active', i+1===n));
+  ['ps1','ps2','ps3'].forEach((id,i) => {
+    const el = document.getElementById(id);
+    el.classList.remove('active','done');
+    if (i+1===n) el.classList.add('active');
+    if (i+1<n)  el.classList.add('done');
+  });
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function step1Next() {
+  const first = document.getElementById('f_first').value.trim();
+  const last  = document.getElementById('f_last').value.trim();
+  const email = document.getElementById('f_email').value.trim();
+  const consentData = document.getElementById('consent_data').checked;
+  const consentMedia = document.getElementById('consent_media').checked;
+  let ok = true;
+  const setErr = (eid,fid,bad) => {
+    document.getElementById(eid).classList.toggle('show',bad);
+    document.getElementById(fid).classList.toggle('invalid',bad);
+    if (bad) ok = false;
+  };
+  setErr('e_first','f_first',!first);
+  setErr('e_last', 'f_last', !last);
+  setErr('e_email','f_email',!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email));
+  document.getElementById('e_consent_data').classList.toggle('show', !consentData);
+  document.getElementById('e_consent_media').classList.toggle('show', !consentMedia);
+  if (!consentData || !consentMedia) ok = false;
+  if (!ok) return;
+  state.first = first; state.last = last;
+  state.email = email; state.phone = document.getElementById('f_phone').value.trim();
+  state.consentMedia = true;
+  goStep(2);
+}
+
+function step2Next() {
+  const totalTickets = Object.values(qty).reduce((a,b)=>a+b,0);
+  if (totalTickets===0) { document.getElementById('e_ticket').classList.add('show'); return; }
+
+  let summaryHTML = `
+    <div class="summary-row"><span class="sk">Name</span><span class="sv">${state.first} ${state.last}</span></div>
+    <div class="summary-row"><span class="sk">Email</span><span class="sv">${state.email}</span></div>`;
+  let grandTotal = 0; let ticketLines = [];
+  for (const [k,v] of Object.entries(qty)) {
+    if (!v) continue;
+    const sub = v * TICKETS[k].price;
+    grandTotal += sub;
+    summaryHTML += `<div class="summary-row"><span class="sk">${TICKETS[k].icon} ${TICKETS[k].label} × ${v}</span><span class="sv">€${sub.toFixed(2)}</span></div>`;
+    ticketLines.push(`${TICKETS[k].icon} ${TICKETS[k].label} × ${v} — €${sub.toFixed(2)}`);
+  }
+  summaryHTML += `<div class="summary-row total"><span class="sk">Total Due</span><span class="sv">€${grandTotal.toFixed(2)}</span></div>`;
+  state._grandTotal = grandTotal;
+  state._ticketLines = ticketLines;
+
+  confirmPayment();
+}
+
+function copyText(text, label) {
+  navigator.clipboard.writeText(text).then(() => alert(label+' copied!'));
+}
+function copyRef() {
+  navigator.clipboard.writeText(state.ref).then(() => {
+    const btn = document.getElementById('copy_ref_btn');
+    btn.textContent = 'copied ✓';
+    setTimeout(() => btn.textContent = 'copy reference', 2000);
+  });
+}
+
+function generateQR() {
+  document.getElementById('qrcode').innerHTML = '';
+  new QRCode(document.getElementById('qrcode'), {
+    text: JSON.stringify({
+      ref: state.ref, name: state.first+' '+state.last,
+      email: state.email, tickets: state._ticketLines,
+      event: 'Onam Celebration 2026 — MDT BW e.V.',
+      date: '12.09.2026', venue: 'Altes Feuerwehrhaus, Stuttgart'
+    }),
+    width:180, height:180,
+    colorDark:'#0E1A08', colorLight:'#FFFDF5',
+    correctLevel: QRCode.CorrectLevel.H
+  });
+}
+
+async function confirmPayment() {
+  const ref = buildRef();
+  state.ref = ref;
+
+  // Build payload for Apps Script
+  const payload = {
+    ref:          state.ref,
+    first:        state.first,
+    last:         state.last,
+    email:        state.email,
+    phone:        state.phone || '',
+    adults:       qty.adult,
+    students:     qty.student,
+    kids:         qty.kid,
+    totalAmount:  state._grandTotal,
+    consentData:  true,
+    consentMedia: state.consentMedia,
+  };
+
+  // Show loading state on step 3 immediately
+  document.getElementById('conf_email_display').textContent = state.email;
+  document.getElementById('conf_ref_display').textContent   = state.ref;
+
+  // Build and inject booking summary
+  let summaryHTML = `
+    <div class="summary-row"><span class="sk">Name</span><span class="sv">${state.first} ${state.last}</span></div>
+    <div class="summary-row"><span class="sk">Email</span><span class="sv">${state.email}</span></div>`;
+  for (const [k,v] of Object.entries(qty)) {
+    if (!v) continue;
+    const sub = v * TICKETS[k].price;
+    summaryHTML += `<div class="summary-row"><span class="sk">${TICKETS[k].icon} ${TICKETS[k].label} × ${v}</span><span class="sv">€${sub.toFixed(2)}</span></div>`;
+  }
+  summaryHTML += `<div class="summary-row total"><span class="sk">Total Due</span><span class="sv">€${state._grandTotal.toFixed(2)}</span></div>`;
+  document.getElementById('pay_summary').innerHTML = summaryHTML;
+
+  let detailsHTML = `
+    <div class="detail-row"><span class="dk">Name</span><span class="dv">${state.first} ${state.last}</span></div>
+    <div class="detail-row"><span class="dk">Email</span><span class="dv">${state.email}</span></div>`;
+  for (const [k,v] of Object.entries(qty)) {
+    if (!v) continue;
+    detailsHTML += `<div class="detail-row"><span class="dk">${TICKETS[k].icon} ${TICKETS[k].label}</span><span class="dv">${v} ticket${v>1?'s':''} · €${(v*TICKETS[k].price).toFixed(2)}</span></div>`;
+  }
+  detailsHTML += `
+    <div class="detail-row"><span class="dk">Total (pending payment)</span><span class="dv">€${state._grandTotal.toFixed(2)}</span></div>
+    <div class="detail-row"><span class="dk">Booking Ref</span><span class="dv" style="color:var(--gold);letter-spacing:0.06em">${state.ref}</span></div>
+    <div class="detail-row"><span class="dk">Event Date</span><span class="dv">12. September 2026</span></div>
+    <div class="detail-row"><span class="dk">Venue</span><span class="dv">Altes Feuerwehrhaus, Stuttgart</span></div>
+    <div class="detail-row"><span class="dk">Slot Reserved Until</span><span class="dv" style="color:var(--gold2)">24 hours from now</span></div>`;
+  document.getElementById('conf_details').innerHTML = detailsHTML;
+
+  goStep(3);
+  generateQR();
+
+  // Send to Apps Script in background (non-blocking)
+  if (APPS_SCRIPT_URL !== 'YOUR_APPS_SCRIPT_WEB_APP_URL') {
+    try {
+      await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        mode: 'no-cors', // Apps Script requires no-cors
+      });
+    } catch(e) {
+      console.warn('Apps Script submission error:', e);
+    }
+  } else {
+    console.info('[DEV] Apps Script URL not set — skipping backend call. Payload:', payload);
+  }
+}
+
+// Check slot availability as soon as the page loads
+checkSlotStatus();
+</script>
+</body>
+</html>
