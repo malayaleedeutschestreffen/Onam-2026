@@ -602,7 +602,7 @@ input.invalid{border-color:var(--err)}
       <div class="tkt" id="tkt_student">
         <div class="tkt-icon">🎓</div>
         <div class="tkt-name">Student</div>
-        <div class="tkt-desc">Valid student ID required</div>
+        <div class="tkt-desc">Please present a valid student ID at the event</div>
         <div class="tkt-price">€20 <small>/ person</small></div>
         <div class="qty-row">
           <button class="qty-btn" onclick="changeQty('student',-1)">−</button>
@@ -613,7 +613,7 @@ input.invalid{border-color:var(--err)}
       <div class="tkt" id="tkt_kid">
         <div class="tkt-icon">🧒</div>
         <div class="tkt-name">Child</div>
-        <div class="tkt-desc">Age 9 and below</div>
+        <div class="tkt-desc">Age 6 – 14</div>
         <div class="tkt-price">€10 <small>/ person</small></div>
         <div class="qty-row">
           <button class="qty-btn" onclick="changeQty('kid',-1)">−</button>
@@ -627,6 +627,10 @@ input.invalid{border-color:var(--err)}
       <span class="ttl-val" id="total_price">€0.00</span>
     </div>
     <div class="err" id="e_ticket" style="margin-bottom:4px">Please add at least one ticket to continue.</div>
+    <div class="notice" style="border-left-color:var(--err);background:rgba(224,112,112,0.07);margin-top:16px">
+      <strong style="color:var(--err)">No cancellations or refunds</strong><br>
+      Please note that once your booking is submitted and payment is made, <strong>no cancellations or refunds are possible</strong>. Make sure your ticket selection is correct before continuing.
+    </div>
     <button class="btn btn-gold" onclick="step2Next()">Continue to Reservation →</button>
     <button class="btn btn-ghost" onclick="goStep(1)">← Back</button>
   </div>
@@ -677,7 +681,7 @@ input.invalid{border-color:var(--err)}
 //  APPS SCRIPT CONFIG
 //  Deploy Code.gs as a Web App, then paste URL here
 // ═══════════════════════════════════════════════
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxDr0XPPquqOiyLSuy6bKmDbJeAalcbCC-kPEjUH1oTaucry6TPrZQ2gDvQ4J-_zwkW/exec'; // ← REPLACE THIS
+const APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_WEB_APP_URL'; // ← REPLACE THIS
 
 const TICKETS = {
   adult:   { label:'Adult (16+)',       icon:'🧑', price:23, code:'A' },
