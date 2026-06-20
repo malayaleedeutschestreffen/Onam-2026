@@ -6,6 +6,7 @@
 <title>Onam Celebration 2026 — MDT BW e.V.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Tiro+Malayalam&family=Playfair+Display:ital,wght@0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
 <style>
 :root {
   --bg:          #0E1A08;
@@ -349,12 +350,17 @@ input.invalid{border-color:var(--err)}
 .conf-top h2{font-family:'Playfair Display',serif;font-size:32px;color:var(--gold2);margin-bottom:6px}
 .conf-top p{font-size:13px;color:var(--text2)}
 .email-ok{display:flex;align-items:center;gap:10px;background:rgba(114,193,145,0.07);border:1px solid rgba(114,193,145,0.2);border-radius:var(--rs);padding:12px 16px;font-size:13px;color:var(--ok);margin-bottom:16px}
-.qr-box{text-align:center;padding:24px;border:1px solid var(--gold-border);border-radius:var(--rs);background:rgba(27,45,20,0.5);margin-bottom:16px}
-.qr-box h3{font-size:14px;font-weight:500;color:var(--text2);margin-bottom:4px}
-.qr-box p{font-size:11px;color:var(--text3);margin-bottom:16px}
-#qrcode canvas,#qrcode img{border-radius:var(--rs);border:6px solid var(--white)}
-.qr-ref{margin-top:14px;font-size:12px;color:var(--text2)}
-.qr-ref strong{color:var(--gold);font-size:14px;letter-spacing:0.1em}
+.email-ref-box{
+  background:rgba(232,160,32,0.07);
+  border:1px solid var(--gold-border);
+  border-radius:var(--rs);
+  padding:22px 20px;
+  margin-bottom:16px;
+  text-align:center;
+}
+.email-ref-box .er-icon{font-size:36px;margin-bottom:10px}
+.email-ref-box h3{font-size:16px;font-weight:600;color:var(--gold2);margin-bottom:6px}
+.email-ref-box p{font-size:13px;color:var(--text2);line-height:1.6}
 .detail-list{border:1px solid rgba(232,160,32,0.12);border-radius:var(--rs);overflow:hidden;margin-bottom:16px}
 .detail-row{display:flex;justify-content:space-between;padding:11px 16px;font-size:13px;border-bottom:1px solid rgba(232,160,32,0.07)}
 .detail-row:last-child{border-bottom:none}
@@ -415,23 +421,6 @@ input.invalid{border-color:var(--err)}
 
 <!-- Pookalam radial background glow -->
 <div class="pookalam-bg"></div>
-
-<!-- ══ SLOTS FULL BANNER (hidden by default) ══ -->
-<div id="slots-full-banner" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(14,26,8,0.97);display:none;flex-direction:column;align-items:center;justify-content:center;padding:32px;text-align:center">
-  <div style="max-width:480px;background:rgba(21,34,16,0.95);border:1px solid rgba(232,160,32,0.35);border-radius:16px;padding:40px 32px;position:relative;overflow:hidden">
-    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#C02828,#E8A020,#F5C842,#E8A020,#C02828)"></div>
-    <div style="font-size:52px;margin-bottom:16px">🎊</div>
-    <h2 style="font-family:'Playfair Display',serif;font-size:28px;color:#F5C842;margin-bottom:12px">Slots are Full</h2>
-    <p style="font-size:14px;color:#A8C080;line-height:1.7;margin-bottom:20px">
-      All slots for <strong style="color:#F0EDD8">Onam Celebration 2026</strong> are currently taken.<br>
-      We will reach out to you if any additional slots become available.
-    </p>
-    <div style="background:rgba(232,160,32,0.07);border:1px solid rgba(232,160,32,0.2);border-radius:10px;padding:16px 20px;font-size:13px;color:#A8C080">
-      📧 To be added to the waitlist, please email us or follow our community channels for updates.
-    </div>
-    <p style="margin-top:20px;font-size:11px;color:#5A7840;letter-spacing:0.06em">Malayalee Deutsches Treffen BW e.V.</p>
-  </div>
-</div>
 
 <div class="page-wrap">
 
@@ -521,11 +510,11 @@ input.invalid{border-color:var(--err)}
       <div class="schedule-heading">Event Schedule</div>
       <div class="schedule-grid">
         <div class="sched-item">
-          <div class="sched-time">10:30 – 12:30</div>
+          <div class="sched-time">11:00 – 13:00</div>
           <div class="sched-label">🚪 Registration</div>
         </div>
         <div class="sched-item">
-          <div class="sched-time">11:30 – 13:30</div>
+          <div class="sched-time">11:30 – 14:00</div>
           <div class="sched-label">🍛 Onam Sadhya</div>
         </div>
         <div class="sched-item">
@@ -602,7 +591,7 @@ input.invalid{border-color:var(--err)}
       <div class="tkt" id="tkt_adult">
         <div class="tkt-icon">🧑</div>
         <div class="tkt-name">Adult</div>
-        <div class="tkt-desc">Age above 14</div>
+        <div class="tkt-desc">Age 16 and above</div>
         <div class="tkt-price">€23 <small>/ person</small></div>
         <div class="qty-row">
           <button class="qty-btn" onclick="changeQty('adult',-1)">−</button>
@@ -613,7 +602,7 @@ input.invalid{border-color:var(--err)}
       <div class="tkt" id="tkt_student">
         <div class="tkt-icon">🎓</div>
         <div class="tkt-name">Student</div>
-        <div class="tkt-desc">Valid student ID must be shown at event registration</div>
+        <div class="tkt-desc">Valid student ID required</div>
         <div class="tkt-price">€20 <small>/ person</small></div>
         <div class="qty-row">
           <button class="qty-btn" onclick="changeQty('student',-1)">−</button>
@@ -624,7 +613,7 @@ input.invalid{border-color:var(--err)}
       <div class="tkt" id="tkt_kid">
         <div class="tkt-icon">🧒</div>
         <div class="tkt-name">Child</div>
-        <div class="tkt-desc">Age 6 – 14</div>
+        <div class="tkt-desc">Age 9 and below</div>
         <div class="tkt-price">€10 <small>/ person</small></div>
         <div class="qty-row">
           <button class="qty-btn" onclick="changeQty('kid',-1)">−</button>
@@ -637,7 +626,6 @@ input.invalid{border-color:var(--err)}
       <span class="ttl-label">Total (<span id="total_count">0</span> ticket(s))</span>
       <span class="ttl-val" id="total_price">€0.00</span>
     </div>
-    <div style="font-size:12px;color:var(--err);text-align:center;margin-top:6px;margin-bottom:2px;letter-spacing:0.03em">⚠️ Cancellation not possible</div>
     <div class="err" id="e_ticket" style="margin-bottom:4px">Please add at least one ticket to continue.</div>
     <button class="btn btn-gold" onclick="step2Next()">Continue to Reservation →</button>
     <button class="btn btn-ghost" onclick="goStep(1)">← Back</button>
@@ -655,11 +643,8 @@ input.invalid{border-color:var(--err)}
     <!-- Booking summary -->
     <div class="summary-box" id="pay_summary"></div>
 
-    <!-- Email notice -->
-    <div class="email-ok">
-      <span style="font-size:18px">📧</span>
-      <span>Payment details have been sent to <strong id="conf_email_display"></strong></span>
-    </div>
+
+
 
     <!-- Payment instruction notice -->
     <div class="notice" style="border-left-color:var(--gold2);background:rgba(232,160,32,0.06);margin-bottom:18px">
@@ -667,11 +652,11 @@ input.invalid{border-color:var(--err)}
       Your slot is reserved for <strong>24 hours</strong>. Payment details have been shared with you via email — please complete the bank transfer and use your booking reference as the <em>Verwendungszweck</em>. Once your payment is verified (usually within 1 business day), your entry ticket QR code will be sent to your email.
     </div>
 
-    <!-- Booking Reference box -->
-    <div class="ref-highlight" style="margin-bottom:16px;padding:24px 20px;text-align:center">
-      <div style="font-size:11px;color:var(--text3);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:10px">Your Booking Reference</div>
-      <div id="conf_ref_display" style="font-size:22px;font-weight:700;color:var(--gold);letter-spacing:0.12em;word-break:break-all"></div>
-      <div style="font-size:12px;color:var(--text2);margin-top:10px">Use this as <em>Verwendungszweck</em> for your bank transfer. Show this reference at the registration desk on the day of the event.</div>
+    <!-- Email reference notice -->
+    <div class="email-ref-box">
+      <div class="er-icon">✉️</div>
+      <h3>Check your inbox!</h3>
+      <p>Your <strong>booking reference number</strong> and full payment instructions have been sent to <strong id="conf_email_display"></strong>.<br>Please follow the instructions in that email to complete your payment.</p>
     </div>
 
     <!-- Booking details -->
@@ -679,7 +664,7 @@ input.invalid{border-color:var(--err)}
 
     <!-- Final notice -->
     <div class="notice" style="border-left-color:var(--ok);background:rgba(114,193,145,0.05)">
-      Your booking confirmation will be emailed once your payment is verified. Please bring your booking reference to the registration desk on the day of the event.
+      Once your bank transfer is verified (usually within 1 business day), you will receive a final confirmation email with your booking reference. Please bring that email to the registration desk on the day of the event.
     </div>
 
     <button class="btn btn-gold" onclick="window.print()">🖨️ Print / Save This Page</button>
@@ -692,56 +677,19 @@ input.invalid{border-color:var(--err)}
 //  APPS SCRIPT CONFIG
 //  Deploy Code.gs as a Web App, then paste URL here
 // ═══════════════════════════════════════════════
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxDr0XPPquqOiyLSuy6bKmDbJeAalcbCC-kPEjUH1oTaucry6TPrZQ2gDvQ4J-_zwkW/exec'; // ← REPLACE THIS
-
-// ═══════════════════════════════════════════════════════════════
-//  SLOT CONTROL
-//  Set BOOKING_OPEN = false to manually close the form immediately.
-//  The Apps Script doGet returns { open: true/false } based on MAX_SLOTS.
-// ═══════════════════════════════════════════════════════════════
-const BOOKING_OPEN = true; // ← Fallback: set false to manually close bookings
-
-async function checkSlotStatus() {
-  if (APPS_SCRIPT_URL === 'YOUR_APPS_SCRIPT_WEB_APP_URL') {
-    if (!BOOKING_OPEN) showSlotsFull();
-    return;
-  }
-  try {
-    const res = await fetch(APPS_SCRIPT_URL + '?action=status');
-    const data = await res.json();
-    if (!data.open) showSlotsFull();
-  } catch(e) {
-    console.warn('Could not check slot status:', e);
-    if (!BOOKING_OPEN) showSlotsFull();
-  }
-}
-
-function showSlotsFull() {
-  const banner = document.getElementById('slots-full-banner');
-  banner.style.display = 'flex';
-  document.body.style.overflow = 'hidden';
-}
-
+const APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_WEB_APP_URL'; // ← REPLACE THIS
 
 const TICKETS = {
-  adult:   { label:'Adult (above 14)',   icon:'🧑', price:23, code:'A' },
-  student: { label:'Student',            icon:'🎓', price:20, code:'S' },
-  kid:     { label:'Child (Age 6–14)',   icon:'🧒', price:10,  code:'K' },
+  adult:   { label:'Adult (16+)',       icon:'🧑', price:23, code:'A' },
+  student: { label:'Student',           icon:'🎓', price:20, code:'S' },
+  kid:     { label:'Child (under 10)',  icon:'🧒', price:10,  code:'K' },
 };
 
 const qty = { adult:0, student:0, kid:0 };
 const state = { first:'', last:'', email:'', phone:'', ref:'', _grandTotal:0, _ticketLines:[] };
 
-function getNextBookingNum() {
-  let n = parseInt(localStorage.getItem('mdt_onam26_seq') || '0') + 1;
-  localStorage.setItem('mdt_onam26_seq', n);
-  return String(n).padStart(3,'0');
-}
 
-function buildRef() {
-  const n = getNextBookingNum();
-  return `MDTOnam26-${n}A${qty.adult}S${qty.student}K${qty.kid}`;
-}
+
 
 function changeQty(type, delta) {
   qty[type] = Math.max(0, qty[type] + delta);
@@ -817,25 +765,41 @@ function step2Next() {
   confirmPayment();
 }
 
-function copyText(text, label) {
-  navigator.clipboard.writeText(text).then(() => alert(label+' copied!'));
-}
-function copyRef() {
-  navigator.clipboard.writeText(state.ref).then(() => {
-    const btn = document.getElementById('copy_ref_btn');
-    btn.textContent = 'copied ✓';
-    setTimeout(() => btn.textContent = 'copy reference', 2000);
-  });
-}
+
+
+
+
 
 
 async function confirmPayment() {
-  const ref = buildRef();
-  state.ref = ref;
+  const btn = document.querySelector('#step2 .btn-gold');
 
-  // Build payload for Apps Script
+  // ── Check availability before proceeding ──────────────────
+  if (APPS_SCRIPT_URL !== 'YOUR_APPS_SCRIPT_WEB_APP_URL') {
+    try {
+      if (btn) { btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Checking availability...'; }
+      const checkRes = await fetch(APPS_SCRIPT_URL);
+      const checkData = await checkRes.json();
+      if (!checkData.open) {
+        alert('Sorry, bookings for this event are now closed.');
+        if (btn) { btn.disabled = false; btn.textContent = 'Continue to Reservation →'; }
+        return;
+      }
+      if (checkData.soldOut) {
+        alert('Sorry, this event is now fully booked. No more slots are available.');
+        if (btn) { btn.disabled = false; btn.textContent = 'Continue to Reservation →'; }
+        return;
+      }
+    } catch(e) {
+      console.warn('Availability check failed, proceeding anyway:', e);
+    } finally {
+      if (btn) { btn.disabled = false; btn.textContent = 'Continue to Reservation →'; }
+    }
+  }
+  // ──────────────────────────────────────────────────────────
+
+  // Build payload — no ref generated here; server assigns it
   const payload = {
-    ref:          state.ref,
     first:        state.first,
     last:         state.last,
     email:        state.email,
@@ -848,9 +812,8 @@ async function confirmPayment() {
     consentMedia: state.consentMedia,
   };
 
-  // Show loading state on step 3 immediately
+  // Show email on confirmation screen
   document.getElementById('conf_email_display').textContent = state.email;
-  document.getElementById('conf_ref_display').textContent   = state.ref;
 
   // Build and inject booking summary
   let summaryHTML = `
@@ -873,7 +836,6 @@ async function confirmPayment() {
   }
   detailsHTML += `
     <div class="detail-row"><span class="dk">Total (pending payment)</span><span class="dv">€${state._grandTotal.toFixed(2)}</span></div>
-    <div class="detail-row"><span class="dk">Booking Ref</span><span class="dv" style="color:var(--gold);letter-spacing:0.06em">${state.ref}</span></div>
     <div class="detail-row"><span class="dk">Event Date</span><span class="dv">12. September 2026</span></div>
     <div class="detail-row"><span class="dk">Venue</span><span class="dv">Altes Feuerwehrhaus, Stuttgart</span></div>
     <div class="detail-row"><span class="dk">Slot Reserved Until</span><span class="dv" style="color:var(--gold2)">24 hours from now</span></div>`;
@@ -881,14 +843,13 @@ async function confirmPayment() {
 
   goStep(3);
 
-  // Send to Apps Script in background (non-blocking)
+  // Send to Apps Script — server generates the booking reference
   if (APPS_SCRIPT_URL !== 'YOUR_APPS_SCRIPT_WEB_APP_URL') {
     try {
-      const params = new URLSearchParams();
-      params.append('data', JSON.stringify(payload));
       await fetch(APPS_SCRIPT_URL, {
         method: 'POST',
-        body: params,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
         mode: 'no-cors',
       });
     } catch(e) {
@@ -898,9 +859,6 @@ async function confirmPayment() {
     console.info('[DEV] Apps Script URL not set — skipping backend call. Payload:', payload);
   }
 }
-
-// Check slot availability as soon as the page loads
-checkSlotStatus();
 </script>
 </body>
 </html>
